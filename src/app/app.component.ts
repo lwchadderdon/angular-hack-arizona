@@ -9,12 +9,12 @@ import {Observable} from "rxjs";
 })
 export class AppComponent {
   title: string = 'Angular2 - HackArizona';
+  books: Observable<Book[]>;
 
   constructor(private booksService: BooksService) {
   }
 
   search(query: string) {
-    this.booksService.list(query)
-      .subscribe(console.log);
+    this.books = this.booksService.list(query);
   }
 }

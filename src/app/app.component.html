@@ -6,3 +6,13 @@
   placeholder="search for books"
   (keydown.enter)="search(searchInput.value)">
 <button (click)="search(searchInput.value)">Search</button>
+
+<ul>
+  <li *ngFor="let book of (books | async)">
+    <img [src]="book.thumbnailUrl" alt="{{ book.title }} thumbnail">
+    <p>{{ book.title }}</p>
+    <small>{{ book.authors }}</small>
+
+    <hr />
+  </li>
+</ul>
