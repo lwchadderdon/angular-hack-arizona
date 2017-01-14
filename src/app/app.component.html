@@ -1,5 +1,12 @@
 <h1>{{title}}</h1>
 
+<h3>Community Favorites</h3>
+<ul>
+  <li *ngFor="let favorite of (favorites | async)">
+    {{ favorite.$value }}
+  </li>
+</ul>
+
 <input
   #searchInput
   type="text"
