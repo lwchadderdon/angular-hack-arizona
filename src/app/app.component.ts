@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {BooksService} from "./books.service";
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title: string = 'Angular2 - HackArizona';
 
+  constructor(private booksService: BooksService) {
+  }
+
   search(query: string) {
-    console.log(query);
+    this.booksService.list(query);
   }
 }
