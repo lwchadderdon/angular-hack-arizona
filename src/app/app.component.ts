@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {BooksService} from "./books.service";
+import {BooksService, Book} from "./books.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,7 @@ export class AppComponent {
   }
 
   search(query: string) {
-    this.booksService.list(query);
+    this.booksService.list(query)
+      .subscribe(console.log);
   }
 }
