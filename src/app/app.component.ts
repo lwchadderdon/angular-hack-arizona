@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {BooksService, Book} from "./books.service";
 import {Observable} from "rxjs";
 import {AngularFire, FirebaseListObservable} from "angularfire2";
+import "rxjs/add/operator/map";
 
 @Component({
   selector: 'app-root',
@@ -19,5 +20,18 @@ export class AppComponent {
 
   search(query: string) {
     this.books = this.booksService.list(query);
+  }
+
+  isFavorite(bookId: string): Observable<boolean> {
+    return this.af.database.object(`/favorites/${bookId}`)
+      .map(object => !!object.$value);
+  }
+
+  setFavorite(bookId: string, isFavorite: boolean) {
+    if (isFavorite) {
+      this.af.database.object(`/favorites/${bookId}`).set(true);
+    } else {
+      this.af.database.object(`/favorites/${bookId}`).remove();
+    }
   }
 }

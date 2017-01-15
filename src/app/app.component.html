@@ -3,7 +3,7 @@
 <h3>Community Favorites</h3>
 <ul>
   <li *ngFor="let favorite of (favorites | async)">
-    {{ favorite.$value }}
+    {{ favorite.$key }}
   </li>
 </ul>
 
@@ -20,6 +20,15 @@
     <p>{{ book.title }}</p>
     <small>{{ book.authors }}</small>
 
-    <hr />
+    <div>
+      <label> Is favorite:
+        <input
+          type="checkbox"
+          [checked]="isFavorite(book.id) | async"
+          (click)="setFavorite(book.id, $event.target.checked)">
+      </label>
+    </div>
+
+    <hr/>
   </li>
 </ul>
